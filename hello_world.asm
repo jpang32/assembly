@@ -23,21 +23,19 @@
 ; What do labels actually do?
 global _start
 
-section .text:
+section __TEXT,__text align=4
 
 _start:
-    mov eax, 0x4; Use write syscall - system understands this value as "write" op
-    mov ebx, 1 ; This line and below are args for write syscall: fd, buffer, size
-    mov ecx, message
-    mov edx, message_length
-    int 0x80 ; 0x80 is the identifier for running a syscall
+    mov rax, 0x2000004; Use write syscall - system understands this value as "write" op
+    mov rdi, 1 ; This line and below are args for write syscall: fd, buffer, size
+    mov rsi, message
+    mov rdx, 1
+    syscall
 
-    ; now gracefully exit
+    mov rax, 0x2000001
+    xor rdi, rdi
+    syscall
 
-    mov eax, 0x1
-    mov ebx, 0
-    int 0x80
-
-section .data:
-    message: db "Hello world!", 0xA ; This line allocates exactly one byte for the text "Hello world!", with a newline character after
-    message_length equ $-message
+section __DATA,__data align=4
+message: db "A"; This line allocates exactly one byte for the text "Hello world!", with a newline character after
+; message_length equ $-message
