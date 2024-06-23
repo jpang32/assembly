@@ -6,7 +6,7 @@
 ; eax has lower 16 bits, upper byte, lower byte
 
 ; You need to consider the number of bits of the area that you are writing to:
-; e.g., writing a one byte var "value" (value db 5), but setting it to eax (a 4 byter register)
+; e.g., writing a one byte var "value" (value db 5), but setting it to eax (a 4 byte register)
 ; will cause the program to read 4 bytes starting at the mem location of
 ; value, and store it in eax. This would potentially store junk values in eax
 
@@ -19,23 +19,21 @@
 ; _start is a convention for programmers, and you need to let the linker know that
 ; this is the entrypoint for the entire program when running the linker
 
-; What is difference between db and equ?
-; What do labels actually do?
 global _start
 
-section __TEXT,__text align=4
+section __TEXT,__text
 
 _start:
-    mov rax, 0x2000004; Use write syscall - system understands this value as "write" op
+    mov rax, 0x2000004 ; Use write syscall - system understands this value as "write" op
     mov rdi, 1 ; This line and below are args for write syscall: fd, buffer, size
-    mov rsi, message
-    mov rdx, 1
+    mov, 
+    mov rdx, message_length
     syscall
 
     mov rax, 0x2000001
     xor rdi, rdi
     syscall
 
-section __DATA,__data align=4
-message: db "A"; This line allocates exactly one byte for the text "Hello world!", with a newline character after
-; message_length equ $-message
+section __DATA,__data
+    message: db "Hello, world!" ; This line allocates exactly one byte for the text "Hello world!"
+    message_length equ $-message
