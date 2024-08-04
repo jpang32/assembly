@@ -14,3 +14,8 @@ What I noticed is that changing "lea rsi, [rel message]" to "mov rsi, [rel messa
 LEA will move operands (which should represent addresses) to the specified register *without* dereferencing the address. MOV will attempt to dereference the address.
 
 So when using "mov rsi, [rel message]", we were storing the data referenced by message's address in RSI, which is not what is required by the WRITE syscall's specification. This resulted in a blank message, either because the data at that faulty memory location was blank or junk that wasn't able to be printed out correctly.
+
+## 08/03/2024
+In preparation for Intro to OS for Georgia Tech master's, I'll be going through examples of the Kernighann and Ritchie book on the C programming language.
+
+I'm starting off with a very simple hello world script in C.
