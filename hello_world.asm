@@ -26,7 +26,7 @@ section __TEXT,__text
 _start:
     mov rax, 0x2000004 ; Use write syscall - system understands this value as "write" op
     mov rdi, 1 ; This line and below are args for write syscall: fd, buffer, size
-    mov, 
+    lea rsi, [rel message]
     mov rdx, message_length
     syscall
 

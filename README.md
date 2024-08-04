@@ -9,3 +9,8 @@ Restored error by using lea instead of rsi - looks like the root of the error wa
 After learning some material about how CPU architecture, I understand some of the context for using "lea rsi, [rel message]". [rel message] is meant to get the address of the message *relative* to the instruction pointer, since macOS binaries use position-independent code (PCI), which expects addresses to be relative to wherever the IP is.
 
 What I noticed is that changing "lea rsi, [rel message]" to "mov rsi, [rel message]" allows the program to compile and run, but nothing is printed out. I will have to do more research as to why that is later.
+
+## 07/21/2024
+LEA will move operands (which should represent addresses) to the specified register *without* dereferencing the address. MOV will attempt to dereference the address.
+
+So when using "mov rsi, [rel message]", we were storing the data referenced by message's address in RSI, which is not what is required by the WRITE syscall's specification. This resulted in a blank message, either because the data at that faulty memory location was blank or junk that wasn't able to be printed out correctly.
