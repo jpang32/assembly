@@ -2,18 +2,19 @@
 
 int main() {
 
-    int c, count = 0;
+    int c;
+    int is_blank = 0;
 
-    char newLine  = '\n';
-    char tab  = '\t';
-    char blank  = ' ';
-    
-    while ((c = getchar()) != EOF)
-    {
-        if (c == newLine || c == tab || c == blank) {
-            count++;
+    while ((c = getchar()) != EOF) {
+        if (c == ' ') {
+            if (!is_blank) {
+                is_blank = 1;
+                printf("%c", c);
+            }
+        } else {
+            is_blank = 0;
+            printf("%c", c);
         }
     }
-    printf("\nNum newlines, tab, blank: %d\n", count);
 
 }
