@@ -9,14 +9,16 @@ int main() {
     int state = IN;
 
     while ((c = getchar()) != EOF) {
+        if (c == ' ' || c == '\n' || c == '\t') {
+            state = OUT;
+        }
         if (state == IN) {
             printf("%c", c);
-        }
-        if (c == ' ') {
-            state = OUT;
-        } else if (state == OUT) {
+        } else if (c != ' ' && c != '\n' && c != '\t') {
+            printf("\n");
+            printf("%c", c);
             state = IN;
         }
     }
-
+    printf("\n");
 }
