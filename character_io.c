@@ -2,14 +2,18 @@
 
 int main() {
 
-    int c;
+    int c, count = 0;
 
-    printf("EOF value = %d", EOF);
+    char newLine  = '\n';
+    char tab  = '\t';
+    char blank  = ' ';
+    
     while ((c = getchar()) != EOF)
     {
-        printf("Character you just...typed? : %c\n", c);
-        // putchar(c);
+        if (c == newLine || c == tab || c == blank) {
+            count++;
+        }
     }
-    
+    printf("\nNum newlines, tab, blank: %d\n", count);
 
 }
