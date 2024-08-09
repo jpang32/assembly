@@ -19,7 +19,7 @@ int main() {
         }
     }
 
-    printf("longest line is %d characters: ", longest_len - 1);
+    printf("longest line is %d characters: ", longest_len);
     printf("%s\n", longest_line);
 
     return 0;
@@ -28,17 +28,27 @@ int main() {
 int get_line(char line[], int max_line_len) {
 
     int c;
-    int i;
-    
-    for (i = 0; i < max_line_len - 1 && (c = getchar()) != EOF && c != '\n'; ++i) {
-        line[i] = c;
-    }
-    if (c == '\n') {
+    int i = 0;
+
+    while ((c = getchar()) != EOF && c != '\n') {
+        if (i < max_line_len - 1) {
+            line[i] = c;
+        }
+
         ++i;
     }
 
-    line[i] = '\0';
-    
+    if (c == '\n') {
+        line[i] = c;
+        ++i;
+    }
+
+    if (i < max_line_len - 1) {
+        line[i] = '\0';
+    } else {
+        line[max_line_len - 1] = '\0';
+    }
+
     return i;
 }
 
