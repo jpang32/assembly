@@ -44,11 +44,6 @@ int get_line(char line[], int max_len) {
         line[i] = c;
     }
 
-    if (c == '\n') {
-        line[end_index] = c;
-        end_index++;
-    }
-
     line[end_index] = '\0';
 
     return end_index;
