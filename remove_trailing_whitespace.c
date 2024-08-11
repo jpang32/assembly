@@ -26,15 +26,10 @@ int main() {
 int get_line(char line[], int max_len) {
 
     int c, i;
-    int end_index;
+    int end_index = 0;
     int in_whitespace = OUT;
 
     for (i = 0; i < (max_len - 1) && (c = getchar()) != EOF && c != '\n'; ++i) {
-        // If c is reg char, write to line (and set in_whitespace to OUT )
-        // If c switches from character to whitespace (OUT to IN), 
-        //      set in_whitespace to IN, and set end_index to i
-        // If c switches from whitespace to character (IN to OUT),
-        //      set in_whitespace to OUT, bump up end_index to i + 1
 
         if (c == ' ' || c == '\t') {
             if (in_whitespace == OUT) {
